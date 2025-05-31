@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\LoginRequest;
 use App\Models\User;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\Api\LoginRequest;
 
 class LoginController extends Controller
 {
@@ -36,12 +36,8 @@ class LoginController extends Controller
 
         return response()->json([
             'message' => 'Logged in.',
-            'user' => [
-                'id' => $user->id,
-                'token' => $token,
-                'name' => $user->name,
-                'email' => $user->email,
-            ],
+            'user' => UserResource::make($user->toArray()),
+            'token' => $token,
         ], 200);
     }
 }
