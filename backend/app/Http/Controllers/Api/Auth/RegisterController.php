@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Models\User;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Api\RegisterRequest;
 
@@ -29,7 +28,7 @@ class RegisterController extends Controller
 
         return response()->json([
             'message' => 'Account created.',
-            'user' => UserResource::make($user->toArray()),
+            'user' => $user->toResource(),
             'token' => $token,
         ], 201);
     }
