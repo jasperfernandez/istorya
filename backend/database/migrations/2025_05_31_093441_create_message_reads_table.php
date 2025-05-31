@@ -12,10 +12,10 @@ return new class extends Migration {
     {
         Schema::create('message_reads', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('message_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamp('read_at')->nullable();
-            $table->unique(['message_id', 'user_id']);
+            $table->foreignId('message_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('read_by')->constrained('users')->cascadeOnDelete();
+            $table->unique(['message_id', 'read_by']);
         });
     }
 

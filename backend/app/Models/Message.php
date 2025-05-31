@@ -10,9 +10,17 @@ class Message extends Model
 {
     protected $fillable = [
         'content',
+        'is_read',
         'conversation_id',
         'sent_by',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'is_read' => 'boolean',
+        ];
+    }
 
     public function conversation(): BelongsTo
     {

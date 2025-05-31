@@ -22,7 +22,14 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'profile' => Storage::disk('public')->url($this->profile_path),
+            'profile' => $this->getProfileUrl(),
         ];
+    }
+
+    private function getProfileUrl(): string|null
+    {
+        return $this->profile_path
+            ? Storage::disk('public')->url($this->profile_path)
+            : null;
     }
 }

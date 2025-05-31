@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class MessageRead extends Model
 {
     protected $fillable = [
-        'message_id',
-        'user_id',
         'read_at',
+        'message_id',
+        'read_by',
     ];
     public $timestamps = false;
 
@@ -19,8 +19,8 @@ class MessageRead extends Model
         return $this->belongsTo(Message::class);
     }
 
-    public function user(): BelongsTo
+    public function reader(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'read_by');
     }
 }

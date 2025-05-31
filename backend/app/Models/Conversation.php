@@ -22,8 +22,7 @@ class Conversation extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'conversation_user')
-            ->withTimestamps();
+        return $this->belongsToMany(User::class, 'conversation_user');
     }
 
     public function messages(): HasMany
