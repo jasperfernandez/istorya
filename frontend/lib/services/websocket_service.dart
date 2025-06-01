@@ -1,57 +1,46 @@
+import 'package:eko/eko.dart';
+import 'package:eko/eko_options.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:frontend/services/secure_storage_service.dart';
-import 'package:simple_flutter_reverb/simple_flutter_reverb.dart';
-import 'package:simple_flutter_reverb/simple_flutter_reverb_options.dart';
+import 'package:istorya/services/secure_storage_service.dart';
 
-/// WebSocketService manages communication with the Reverb WebSocket service.
-class WebSocketService {
-  // SecureStorageService instance to retrieve access tokens for authentication
+abstract class IWebSocketService {
+  void listenPublicChannel(void Function(dynamic) onData, String channel);
+  void listenPrivateChannel(void Function(dynamic) onData, String channel);
+  void close();
+}
+
+class WebSocketService implements IWebSocketService {
   final _secureStorageService = SecureStorageService();
 
-  // FlutterReverb instance for managing WebSocket connections
-  late final SimpleFlutterReverb _flutterReverb;
+  late final Eko _eko;
 
-  /// Constructor to initialize the WebSocketService
-  /// Sets up the FlutterReverb with the required configuration
   WebSocketService() {
-    // Creating an options object for Reverb WebSocket connection
-    final SimpleFlutterReverbOptions options = SimpleFlutterReverbOptions(
-      // Reading environment variables from .env file for Reverb configuration
+    final EkoOptions options = EkoOptions(
       scheme: dotenv.env['REVERB_SCHEME']!,
       host: dotenv.env['REVERB_HOST']!,
       port: dotenv.env['REVERB_PORT']!,
       appKey: dotenv.env['REVERB_APP_KEY']!,
-      authUrl:
-          dotenv
-              .env['REVERB_AUTH_URL']!, // URL for authentication (private channels) (Documentation: https://laravel.com/docs/11.x/broadcasting#authorizing-channels)
-      privatePrefix: 'private-', // Prefix for private channels (Laravel default prefix is 'private-')
-      // Retrieving the access token from secure storage for authentication
-      authToken: _secureStorageService.read('auth_token'),
+      authUrl: dotenv.env['REVERB_AUTH_URL']!,
+      privatePrefix: 'private-',
+      // authToken: _secureStorageService.read('auth_token'),
+      authToken: '2|z1yfi7Qh2ApEU6imLWwICz6XxIMlUvwnyKnW8jHH703dfcb7',
     );
 
-    // Initializing FlutterReverb with the provided options
-    _flutterReverb = SimpleFlutterReverb(options: options);
+    _eko = Eko(options: options);
   }
 
-  /// Listens to a public channel and calls the onData callback with the received data.
-  ///
-  /// [onData] - A callback function that will be invoked with the data from the channel.
-  /// [channel] - The name of the public channel to listen to.
+  @override
   void listenPublicChannel(void Function(dynamic) onData, String channel) {
-    // Subscribing to the public channel
-    _flutterReverb.listen(onData, channel);
+    _eko.listen(onData, channel);
   }
 
-  /// Listens to a private channel and calls the onData callback with the received data.
-  ///
-  /// [onData] - A callback function that will be invoked with the data from the channel.
-  /// [channel] - The name of the private channel to listen to.
+  @override
   void listenPrivateChannel(void Function(dynamic) onData, String channel) {
-    // Subscribing to the private channel by passing `isPrivate: true`
-    _flutterReverb.listen(onData, channel, isPrivate: true);
+    _eko.listen(onData, channel, isPrivate: true);
   }
 
+  @override
   void close() {
-    _flutterReverb.close();
+    _eko.close();
   }
 }

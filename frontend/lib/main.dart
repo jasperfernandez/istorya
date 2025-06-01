@@ -1,6 +1,8 @@
+import 'package:eko/eko.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:frontend/services/websocket_service.dart';
+import 'package:istorya/models/message_model.dart';
+import 'package:istorya/services/websocket_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +27,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  WebSocketService? _webSocketService;
+  late WebSocketService _webSocketService;
   bool _isLoading = true;
   final List<String> _messages = [];
 
@@ -33,15 +35,20 @@ class _HomeScreenState extends State<HomeScreen> {
     final service = WebSocketService();
 
     service.listenPrivateChannel((data) {
-      debugPrint('Received data: $data');
       setState(() {
-        if (data is Map && data['content'] != null) {
-          _messages.add(data['content'].toString());
-        } else {
-          _messages.add(data.toString());
+        if (data is WebsocketResponse) {
+          final eventData = data.data;
+          final event = data.event;
+          debugPrint('WebsocketResponse: Event: $event Event Data: $eventData');
+
+          if (event == 'App\\Events\\MessageSent' && eventData != null) {
+            final message = MessageModel.fromMap(eventData);
+            debugPrint('MessageSent Data: $message');
+            _messages.add(message.content);
+          }
         }
       });
-    }, 'private-conversation.1');
+    }, 'conversation.1');
 
     setState(() {
       _webSocketService = service;
@@ -57,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
-    _webSocketService?.close();
+    _webSocketService.close();
     super.dispose();
   }
 

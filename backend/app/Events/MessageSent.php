@@ -41,9 +41,12 @@ class MessageSent implements ShouldBroadcast
         return [
             'id' => $this->message->id,
             'content' => $this->message->content,
-            'sent_by' => $this->message->sent_by,
+            'isRead' => $this->message->is_read,
+            'sentBy' => $this->message->sent_by,
+            'conversationId' => $this->message->conversation_id,
+            'createdAt' => $this->message->created_at,
+
             'sender' => $this->message->sender,
-            'created_at' => $this->message->created_at,
         ];
     }
 }
