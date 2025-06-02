@@ -2,10 +2,7 @@ class ValidationException implements Exception {
   final String message;
   final FieldErrors errors;
 
-  ValidationException({
-    required this.message,
-    required this.errors,
-  });
+  ValidationException({required this.message, required this.errors});
 
   @override
   String toString() => 'ValidationException: $message';
@@ -34,12 +31,15 @@ class FieldErrors {
   // Whether a specific field has an error
   bool has(String field) => _errors.containsKey(field);
 
+  // Clear all errors
+  void clear() {
+    _errors.clear();
+  }
+
   // Create from raw JSON
   factory FieldErrors.fromJson(Map<String, dynamic> json) {
     return FieldErrors(
-      json.map(
-        (key, value) => MapEntry(key, List<String>.from(value)),
-      ),
+      json.map((key, value) => MapEntry(key, List<String>.from(value))),
     );
   }
 }

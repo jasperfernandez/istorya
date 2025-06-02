@@ -1,7 +1,6 @@
 import 'package:eko/eko.dart';
 import 'package:eko/eko_options.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:istorya/services/secure_storage_service.dart';
 
 abstract class IWebSocketService {
   void listenPublicChannel(void Function(dynamic) onData, String channel);
@@ -10,7 +9,7 @@ abstract class IWebSocketService {
 }
 
 class WebSocketService implements IWebSocketService {
-  final _secureStorageService = SecureStorageService();
+  // final _secureStorageService = SecureStorageService();
 
   late final Eko _eko;
 

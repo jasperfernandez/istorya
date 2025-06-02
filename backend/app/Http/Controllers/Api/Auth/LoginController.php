@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Api\LoginRequest;
+use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
@@ -16,19 +17,15 @@ class LoginController extends Controller
         $user = User::where('email', $validated['email'])->first();
 
         if (!$user) {
-            return response()->json([
-                'errors' => [
-                    'email' => ['Account not found.'],
-                ],
-            ], 422);
+            throw ValidationException::withMessages([
+                'email' => ['Account not found.'],
+            ]);
         }
 
         if (!$user || !Hash::check($validated['password'], $user->password)) {
-            return response()->json([
-                'errors' => [
-                    'email' => ['Password incorrect.'],
-                ],
-            ], 422);
+            throw ValidationException::withMessages([
+                'password' => ['Password incorrect.'],
+            ]);
         }
 
         $token = $user->createToken($user->name)->plainTextToken;
