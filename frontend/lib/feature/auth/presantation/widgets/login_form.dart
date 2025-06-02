@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:istorya/core/exceptions/validation_exception.dart';
-import 'package:istorya/feature/auth/auth_provider.dart';
-import 'package:istorya/feature/auth/models/user.dart';
+import 'package:istorya/feature/auth/application/auth_provider.dart';
+import 'package:istorya/feature/auth/data/models/user.dart';
 
 class LoginForm extends ConsumerStatefulWidget {
   const LoginForm({super.key});
@@ -65,14 +65,12 @@ class _LoginFormState extends ConsumerState<LoginForm> {
         spacing: 16,
         mainAxisSize: MainAxisSize.min,
         children: [
+          Text('Log In', style: Theme.of(context).textTheme.headlineMedium),
           TextFormField(
             controller: _emailController,
             decoration: InputDecoration(
               labelText: 'Email',
-              prefixIcon: Icon(
-                Icons.email,
-                color: _fieldErrors.has('email') ? Colors.red : null,
-              ),
+              prefixIcon: Icon(Icons.email),
               errorText: _fieldErrors.first('email'),
             ),
             keyboardType: TextInputType.emailAddress,
@@ -87,10 +85,7 @@ class _LoginFormState extends ConsumerState<LoginForm> {
             controller: _passwordController,
             decoration: InputDecoration(
               labelText: 'Password',
-              prefixIcon: Icon(
-                Icons.lock,
-                color: _fieldErrors.has('password') ? Colors.red : null,
-              ),
+              prefixIcon: Icon(Icons.lock),
               suffixIcon: IconButton(
                 icon: Icon(
                   _obscurePassword ? Icons.visibility : Icons.visibility_off,

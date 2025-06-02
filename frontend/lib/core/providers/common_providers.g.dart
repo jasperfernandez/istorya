@@ -101,7 +101,7 @@ final class SocketServiceProvider
         argument: null,
         retry: null,
         name: r'socketServiceProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -128,7 +128,7 @@ final class SocketServiceProvider
   }
 }
 
-String _$socketServiceHash() => r'c698e5b65b717210e926246d82f2d51340b233ee';
+String _$socketServiceHash() => r'9747a79a7fbc36111e25fab1d6659e3af916b249';
 
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

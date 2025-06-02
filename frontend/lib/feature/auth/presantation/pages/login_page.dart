@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:istorya/feature/auth/widgets/login_form.dart';
+import 'package:istorya/feature/auth/presantation/widgets/login_form.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});

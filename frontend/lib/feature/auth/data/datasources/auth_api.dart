@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:istorya/core/constants/api_routes.dart';
 import 'package:istorya/core/exceptions/validation_exception.dart';
-import 'package:istorya/feature/auth/models/login_response.dart';
+import 'package:istorya/feature/auth/data/models/login_response.dart';
 
 abstract class IAuthAPI {
   Future<LoginResponse> login(String email, String password);

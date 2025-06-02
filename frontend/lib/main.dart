@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:istorya/feature/auth/pages/login_page.dart';
+import 'package:istorya/feature/auth/presantation/pages/login_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async {

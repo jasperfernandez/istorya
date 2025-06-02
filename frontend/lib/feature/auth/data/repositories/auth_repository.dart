@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:istorya/core/constants/app_constants.dart';
-import 'package:istorya/feature/auth/models/user.dart';
-import 'auth_api.dart';
+import 'package:istorya/feature/auth/data/models/user.dart';
+import '../datasources/auth_api.dart';
 
 abstract class IAuthRepository {
   Future<User> login(String email, String password);

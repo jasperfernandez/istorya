@@ -1,8 +1,8 @@
 import 'package:istorya/core/providers/common_providers.dart';
-import 'package:istorya/feature/auth/models/user.dart';
+import 'package:istorya/feature/auth/data/models/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'auth_api.dart';
-import 'auth_repository.dart';
+import '../data/datasources/auth_api.dart';
+import '../data/repositories/auth_repository.dart';
 
 part 'auth_provider.g.dart';
 
