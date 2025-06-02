@@ -1,19 +1,21 @@
 import 'package:eko/eko.dart';
 import 'package:eko/eko_options.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:istorya/core/constants/app_constants.dart';
 
-abstract class IWebSocketService {
+abstract class ISocketService {
   void listenPublicChannel(void Function(dynamic) onData, String channel);
   void listenPrivateChannel(void Function(dynamic) onData, String channel);
   void close();
 }
 
-class WebSocketService implements IWebSocketService {
-  // final _secureStorageService = SecureStorageService();
+class SocketService implements ISocketService {
+  final FlutterSecureStorage storage;
 
   late final Eko _eko;
 
-  WebSocketService() {
+  SocketService(this.storage) {
     final EkoOptions options = EkoOptions(
       scheme: dotenv.env['REVERB_SCHEME']!,
       host: dotenv.env['REVERB_HOST']!,
@@ -21,8 +23,7 @@ class WebSocketService implements IWebSocketService {
       appKey: dotenv.env['REVERB_APP_KEY']!,
       authUrl: dotenv.env['REVERB_AUTH_URL']!,
       privatePrefix: 'private-',
-      // authToken: _secureStorageService.read('auth_token'),
-      authToken: '2|z1yfi7Qh2ApEU6imLWwICz6XxIMlUvwnyKnW8jHH703dfcb7',
+      authToken: storage.read(key: AppConstants.tokenKey),
     );
 
     _eko = Eko(options: options);

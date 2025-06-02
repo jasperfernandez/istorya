@@ -4,7 +4,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'auth_response.dart';
+part of 'login_response.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,22 +14,22 @@ part of 'auth_response.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$AuthResponse {
+mixin _$LoginResponse {
 
  String get token; User get user;
-/// Create a copy of AuthResponse
+/// Create a copy of LoginResponse
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$AuthResponseCopyWith<AuthResponse> get copyWith => _$AuthResponseCopyWithImpl<AuthResponse>(this as AuthResponse, _$identity);
+$LoginResponseCopyWith<LoginResponse> get copyWith => _$LoginResponseCopyWithImpl<LoginResponse>(this as LoginResponse, _$identity);
 
-  /// Serializes this AuthResponse to a JSON map.
+  /// Serializes this LoginResponse to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthResponse&&(identical(other.token, token) || other.token == token)&&(identical(other.user, user) || other.user == user));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoginResponse&&(identical(other.token, token) || other.token == token)&&(identical(other.user, user) || other.user == user));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -38,15 +38,15 @@ int get hashCode => Object.hash(runtimeType,token,user);
 
 @override
 String toString() {
-  return 'AuthResponse(token: $token, user: $user)';
+  return 'LoginResponse(token: $token, user: $user)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $AuthResponseCopyWith<$Res>  {
-  factory $AuthResponseCopyWith(AuthResponse value, $Res Function(AuthResponse) _then) = _$AuthResponseCopyWithImpl;
+abstract mixin class $LoginResponseCopyWith<$Res>  {
+  factory $LoginResponseCopyWith(LoginResponse value, $Res Function(LoginResponse) _then) = _$LoginResponseCopyWithImpl;
 @useResult
 $Res call({
  String token, User user
@@ -57,14 +57,14 @@ $UserCopyWith<$Res> get user;
 
 }
 /// @nodoc
-class _$AuthResponseCopyWithImpl<$Res>
-    implements $AuthResponseCopyWith<$Res> {
-  _$AuthResponseCopyWithImpl(this._self, this._then);
+class _$LoginResponseCopyWithImpl<$Res>
+    implements $LoginResponseCopyWith<$Res> {
+  _$LoginResponseCopyWithImpl(this._self, this._then);
 
-  final AuthResponse _self;
-  final $Res Function(AuthResponse) _then;
+  final LoginResponse _self;
+  final $Res Function(LoginResponse) _then;
 
-/// Create a copy of AuthResponse
+/// Create a copy of LoginResponse
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? token = null,Object? user = null,}) {
   return _then(_self.copyWith(
@@ -73,7 +73,7 @@ as String,user: null == user ? _self.user : user // ignore: cast_nullable_to_non
 as User,
   ));
 }
-/// Create a copy of AuthResponse
+/// Create a copy of LoginResponse
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -89,27 +89,27 @@ $UserCopyWith<$Res> get user {
 /// @nodoc
 @JsonSerializable()
 
-class _AuthResponse implements AuthResponse {
-  const _AuthResponse({required this.token, required this.user});
-  factory _AuthResponse.fromJson(Map<String, dynamic> json) => _$AuthResponseFromJson(json);
+class _LoginResponse implements LoginResponse {
+  const _LoginResponse({required this.token, required this.user});
+  factory _LoginResponse.fromJson(Map<String, dynamic> json) => _$LoginResponseFromJson(json);
 
 @override final  String token;
 @override final  User user;
 
-/// Create a copy of AuthResponse
+/// Create a copy of LoginResponse
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$AuthResponseCopyWith<_AuthResponse> get copyWith => __$AuthResponseCopyWithImpl<_AuthResponse>(this, _$identity);
+_$LoginResponseCopyWith<_LoginResponse> get copyWith => __$LoginResponseCopyWithImpl<_LoginResponse>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$AuthResponseToJson(this, );
+  return _$LoginResponseToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthResponse&&(identical(other.token, token) || other.token == token)&&(identical(other.user, user) || other.user == user));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoginResponse&&(identical(other.token, token) || other.token == token)&&(identical(other.user, user) || other.user == user));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -118,15 +118,15 @@ int get hashCode => Object.hash(runtimeType,token,user);
 
 @override
 String toString() {
-  return 'AuthResponse(token: $token, user: $user)';
+  return 'LoginResponse(token: $token, user: $user)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$AuthResponseCopyWith<$Res> implements $AuthResponseCopyWith<$Res> {
-  factory _$AuthResponseCopyWith(_AuthResponse value, $Res Function(_AuthResponse) _then) = __$AuthResponseCopyWithImpl;
+abstract mixin class _$LoginResponseCopyWith<$Res> implements $LoginResponseCopyWith<$Res> {
+  factory _$LoginResponseCopyWith(_LoginResponse value, $Res Function(_LoginResponse) _then) = __$LoginResponseCopyWithImpl;
 @override @useResult
 $Res call({
  String token, User user
@@ -137,24 +137,24 @@ $Res call({
 
 }
 /// @nodoc
-class __$AuthResponseCopyWithImpl<$Res>
-    implements _$AuthResponseCopyWith<$Res> {
-  __$AuthResponseCopyWithImpl(this._self, this._then);
+class __$LoginResponseCopyWithImpl<$Res>
+    implements _$LoginResponseCopyWith<$Res> {
+  __$LoginResponseCopyWithImpl(this._self, this._then);
 
-  final _AuthResponse _self;
-  final $Res Function(_AuthResponse) _then;
+  final _LoginResponse _self;
+  final $Res Function(_LoginResponse) _then;
 
-/// Create a copy of AuthResponse
+/// Create a copy of LoginResponse
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? token = null,Object? user = null,}) {
-  return _then(_AuthResponse(
+  return _then(_LoginResponse(
 token: null == token ? _self.token : token // ignore: cast_nullable_to_non_nullable
 as String,user: null == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
 as User,
   ));
 }
 
-/// Create a copy of AuthResponse
+/// Create a copy of LoginResponse
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')

@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:istorya/constants.dart';
+import 'package:istorya/core/constants/api_routes.dart';
 import 'package:istorya/core/exceptions/validation_exception.dart';
-import 'package:istorya/feature/auth/models/auth_response.dart';
+import 'package:istorya/feature/auth/models/login_response.dart';
 
 abstract class IAuthAPI {
-  Future<AuthResponse> login(String email, String password);
+  Future<LoginResponse> login(String email, String password);
   Future<void> logout(String token);
 }
 
@@ -15,9 +15,9 @@ class AuthAPI implements IAuthAPI {
   AuthAPI(this.client);
 
   @override
-  Future<AuthResponse> login(String email, String password) async {
+  Future<LoginResponse> login(String email, String password) async {
     final response = await client.post(
-      Uri.parse(ApiPaths.login),
+      Uri.parse(ApiRoutes.login),
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
@@ -28,7 +28,7 @@ class AuthAPI implements IAuthAPI {
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body) as Map<String, dynamic>;
 
-      return AuthResponse.fromJson(data);
+      return LoginResponse.fromJson(data);
     } else if (response.statusCode == 422) {
       final data = jsonDecode(response.body);
       final message = data['message'] ?? 'Validation failed.';
@@ -43,7 +43,7 @@ class AuthAPI implements IAuthAPI {
   @override
   Future<void> logout(String token) async {
     final response = await client.post(
-      Uri.parse(ApiPaths.logout),
+      Uri.parse(ApiRoutes.logout),
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',

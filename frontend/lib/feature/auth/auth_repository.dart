@@ -1,27 +1,36 @@
 import 'dart:convert';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:istorya/constants.dart';
-import 'package:istorya/feature/auth/models/auth_response.dart';
+import 'package:istorya/core/constants/app_constants.dart';
 import 'package:istorya/feature/auth/models/user.dart';
 import 'auth_api.dart';
 
-class AuthRepository {
+abstract class IAuthRepository {
+  Future<User> login(String email, String password);
+  Future<void> logout();
+  Future<String?> getToken();
+  Future<User?> getUser();
+  Future<bool> isLoggedIn();
+}
+
+class AuthRepository implements IAuthRepository {
   final AuthAPI api;
   final FlutterSecureStorage storage;
 
   AuthRepository(this.api, this.storage);
 
-  Future<AuthResponse> login(String email, String password) async {
+  @override
+  Future<User> login(String email, String password) async {
     final authResponse = await api.login(email, password);
     await storage.write(key: AppConstants.tokenKey, value: authResponse.token);
     await storage.write(
       key: AppConstants.userKey,
       value: jsonEncode(authResponse.user.toJson()),
     );
-    return authResponse;
+    return authResponse.user;
   }
 
+  @override
   Future<void> logout() async {
     final token = await getToken();
     if (token != null) await api.logout(token);
@@ -29,8 +38,10 @@ class AuthRepository {
     await storage.delete(key: AppConstants.userKey);
   }
 
+  @override
   Future<String?> getToken() => storage.read(key: AppConstants.tokenKey);
 
+  @override
   Future<User?> getUser() async {
     final userJson = await storage.read(key: AppConstants.userKey);
     if (userJson == null) return null;
@@ -42,6 +53,7 @@ class AuthRepository {
     }
   }
 
+  @override
   Future<bool> isLoggedIn() async {
     final token = await getToken();
     return token != null;

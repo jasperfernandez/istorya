@@ -87,39 +87,39 @@ final class AuthRepositoryProvider
 
 String _$authRepositoryHash() => r'7e4e784659e33e5bba5fbfaeec696e612f3e28a0';
 
-@ProviderFor(AuthProvider)
-const authProviderProvider = AuthProviderProvider._();
+@ProviderFor(AuthNotifier)
+const authNotifierProvider = AuthNotifierProvider._();
 
-final class AuthProviderProvider
-    extends $AsyncNotifierProvider<AuthProvider, User?> {
-  const AuthProviderProvider._()
+final class AuthNotifierProvider
+    extends $AsyncNotifierProvider<AuthNotifier, User?> {
+  const AuthNotifierProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'authProviderProvider',
+        name: r'authNotifierProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$authProviderHash();
+  String debugGetCreateSourceHash() => _$authNotifierHash();
 
   @$internal
   @override
-  AuthProvider create() => AuthProvider();
+  AuthNotifier create() => AuthNotifier();
 
   @$internal
   @override
-  $AsyncNotifierProviderElement<AuthProvider, User?> $createElement(
+  $AsyncNotifierProviderElement<AuthNotifier, User?> $createElement(
     $ProviderPointer pointer,
   ) => $AsyncNotifierProviderElement(pointer);
 }
 
-String _$authProviderHash() => r'4b0718e5b1e85f6228532286c3ed0db84c723095';
+String _$authNotifierHash() => r'574c9d7efee76a08d97af4d30815138caa063486';
 
-abstract class _$AuthProvider extends $AsyncNotifier<User?> {
+abstract class _$AuthNotifier extends $AsyncNotifier<User?> {
   FutureOr<User?> build();
   @$mustCallSuper
   @override

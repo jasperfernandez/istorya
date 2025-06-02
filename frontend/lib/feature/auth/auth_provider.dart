@@ -16,7 +16,7 @@ AuthRepository authRepository(Ref ref) => AuthRepository(
 );
 
 @riverpod
-class AuthProvider extends _$AuthProvider {
+class AuthNotifier extends _$AuthNotifier {
   @override
   Future<User?> build() async {
     return await ref.read(authRepositoryProvider).getUser();
@@ -25,10 +25,10 @@ class AuthProvider extends _$AuthProvider {
   Future<void> login(String email, String password) async {
     try {
       state = const AsyncLoading();
-      final authResponse = await ref
+      final user = await ref
           .read(authRepositoryProvider)
           .login(email, password);
-      state = AsyncData(authResponse.user);
+      state = AsyncData(user);
     } catch (e, st) {
       state = AsyncError(e, st);
     }

@@ -20,7 +20,7 @@ class _LoginFormState extends ConsumerState<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    ref.listen<AsyncValue<User?>>(authProviderProvider, (previous, next) {
+    ref.listen<AsyncValue<User?>>(authNotifierProvider, (previous, next) {
       if (next is AsyncError) {
         if (next.error is ValidationException) {
           final validationError = next.error as ValidationException;
@@ -42,16 +42,16 @@ class _LoginFormState extends ConsumerState<LoginForm> {
       }
 
       if (next is AsyncData && next.value != null) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(const SnackBar(content: Text('Welcome to Istortya!')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Welcome to Istortya ${next.value!.name}!')),
+        );
       }
     });
 
     void login() {
       if (_formKey.currentState!.validate()) {
         ref
-            .read(authProviderProvider.notifier)
+            .read(authNotifierProvider.notifier)
             .login(
               _emailController.text.trim(),
               _passwordController.text.trim(),
@@ -113,7 +113,7 @@ class _LoginFormState extends ConsumerState<LoginForm> {
           ),
           Consumer(
             builder: (context, ref, child) {
-              final user = ref.watch(authProviderProvider);
+              final user = ref.watch(authNotifierProvider);
 
               return ElevatedButton(
                 onPressed: login,

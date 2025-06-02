@@ -89,5 +89,46 @@ final class SecureStorageProvider
 
 String _$secureStorageHash() => r'5f0f1e7075cbfc89c9f88bceffd63f21bf812b87';
 
+@ProviderFor(socketService)
+const socketServiceProvider = SocketServiceProvider._();
+
+final class SocketServiceProvider
+    extends $FunctionalProvider<SocketService, SocketService>
+    with $Provider<SocketService> {
+  const SocketServiceProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'socketServiceProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$socketServiceHash();
+
+  @$internal
+  @override
+  $ProviderElement<SocketService> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  SocketService create(Ref ref) {
+    return socketService(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(SocketService value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $ValueProvider<SocketService>(value),
+    );
+  }
+}
+
+String _$socketServiceHash() => r'c698e5b65b717210e926246d82f2d51340b233ee';
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
