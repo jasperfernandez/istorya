@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:istorya/core/theme/app_theme.dart';
 import 'package:istorya/feature/auth/presantation/pages/login_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -16,9 +17,7 @@ class Istorya extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Istorya',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
+      theme: AppTheme.lightTheme,
       home: const LoginPage(),
     );
   }

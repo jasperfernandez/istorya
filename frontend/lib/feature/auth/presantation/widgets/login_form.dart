@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:istorya/core/exceptions/validation_exception.dart';
 import 'package:istorya/feature/auth/application/auth_provider.dart';
 import 'package:istorya/feature/auth/data/models/user.dart';
+import 'package:istorya/feature/conversation_list/presentation/pages/conversation_list_page.dart';
 
 class LoginForm extends ConsumerStatefulWidget {
   const LoginForm({super.key});
@@ -45,6 +46,10 @@ class _LoginFormState extends ConsumerState<LoginForm> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Welcome to Istortya ${next.value!.name}!')),
         );
+
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const ConversationListPage()),
+        );
       }
     });
 
@@ -65,7 +70,12 @@ class _LoginFormState extends ConsumerState<LoginForm> {
         spacing: 16,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text('Log In', style: Theme.of(context).textTheme.headlineMedium),
+          Text(
+            'Log In',
+            style: Theme.of(
+              context,
+            ).textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.bold),
+          ),
           TextFormField(
             controller: _emailController,
             decoration: InputDecoration(
