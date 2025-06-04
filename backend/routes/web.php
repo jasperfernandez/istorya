@@ -6,7 +6,7 @@ use App\Events\MessageSent;
 use App\Models\Message;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
+Route::get('/', function() {
     $message = Message::create([
         'content' => 'TRYYY...',
         'is_read' => true,

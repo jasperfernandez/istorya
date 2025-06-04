@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('message_reads', function (Blueprint $table) {
+        Schema::create('message_reads', function(Blueprint $table) {
             $table->id();
             $table->timestamp('read_at')->nullable();
             $table->foreignId('message_id')->constrained()->cascadeOnDelete();
