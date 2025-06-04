@@ -1,15 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
-use App\Http\Resources\MessageReadResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * @mixin \App\Models\Message
  */
-class MessageResource extends JsonResource
+final class MessageResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

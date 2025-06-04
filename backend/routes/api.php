@@ -1,11 +1,13 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+declare(strict_types=1);
+
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\LogoutController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\ConversationStartController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 Broadcast::routes(['middleware' => ['auth:sanctum']]);
 
@@ -21,7 +23,7 @@ Route::post('/logout', LogoutController::class)
 
 Route::middleware('auth:sanctum')->group(function () {
     // User
-    Route::get('/user', fn(Request $request) => $request->user());
+    Route::get('/user', fn (Request $request) => $request->user());
 
     // Conversations
     Route::post('/conversations/start', ConversationStartController::class);

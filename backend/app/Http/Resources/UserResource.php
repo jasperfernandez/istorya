@@ -1,15 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @mixin \App\Models\User
  */
-class UserResource extends JsonResource
+final class UserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -26,7 +28,7 @@ class UserResource extends JsonResource
         ];
     }
 
-    private function getProfileUrl(): string|null
+    private function getProfileUrl(): ?string
     {
         return $this->profile_path
             ? Storage::disk('public')->url($this->profile_path)

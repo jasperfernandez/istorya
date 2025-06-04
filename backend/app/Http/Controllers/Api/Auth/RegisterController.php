@@ -1,13 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api\Auth;
 
-use App\Models\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Api\RegisterRequest;
+use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
-class RegisterController extends Controller
+final class RegisterController extends Controller
 {
     public function __invoke(RegisterRequest $request)
     {

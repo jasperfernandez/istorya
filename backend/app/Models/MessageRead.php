@@ -1,18 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class MessageRead extends Model
+final class MessageRead extends Model
 {
+    public $timestamps = false;
+
     protected $fillable = [
         'read_at',
         'message_id',
         'read_by',
     ];
-    public $timestamps = false;
 
     public function message(): BelongsTo
     {

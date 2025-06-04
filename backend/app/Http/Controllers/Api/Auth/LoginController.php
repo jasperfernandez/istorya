@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api\Auth;
 
-use App\Models\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Api\LoginRequest;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
-class LoginController extends Controller
+final class LoginController extends Controller
 {
     public function __invoke(LoginRequest $request)
     {
@@ -16,13 +18,13 @@ class LoginController extends Controller
 
         $user = User::where('email', $validated['email'])->first();
 
-        if (!$user) {
+        if (! $user) {
             throw ValidationException::withMessages([
                 'email' => ['Account not found.'],
             ]);
         }
 
-        if (!$user || !Hash::check($validated['password'], $user->password)) {
+        if (! $user || ! Hash::check($validated['password'], $user->password)) {
             throw ValidationException::withMessages([
                 'password' => ['Password incorrect.'],
             ]);
